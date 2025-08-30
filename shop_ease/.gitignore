@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Virtual environments
+venv/
+venv_shop_ease/
+.env/
+
+# IDE
+.vscode/
+.idea/
