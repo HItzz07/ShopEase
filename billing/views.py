@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import Bill
-from .serializers import BillItemSerializer
+from .serializers import BillSerializer
 
 class BillViewSet(viewsets.ModelViewSet):
-    serializer_class = BillItemSerializer
+    serializer_class = BillSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
