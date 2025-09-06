@@ -8,6 +8,7 @@ class Company(models.Model):
         on_delete=models.CASCADE,
         related_name="owned_companies"
     )
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     company_contact_number = models.CharField(max_length=100)
 

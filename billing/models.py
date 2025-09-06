@@ -21,7 +21,7 @@ class Bill(models.Model):
 
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="bills")
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="bills")
-    bill_number = models.CharField(max_length=50)
+    bill_number = models.CharField(max_length=50, blank=True, null=True)
     date = models.DateField(auto_now_add=True)
     total_amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="DRAFT")
@@ -33,6 +33,14 @@ class Bill(models.Model):
 
     def __str__(self):
         return f"{self.bill_number} - {self.company.name}"
+
+    def save(self, *args, **kwargs):
+        if not self.bill_number:
+            super().save(*args, **kwargs)
+            self.bill_number = f"Bill-{self.id}"
+            return super().save(update_fields=["bill_number"])
+
+        super().save(*args, **kwargs)
 
 
 class BillItem(models.Model):
